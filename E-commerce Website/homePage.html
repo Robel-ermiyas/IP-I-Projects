@@ -1,161 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+  <head>
+    <title>Amazon Project</title>
 
-<head>
-    <meta charset="UTF-8">
+    <!-- This code is needed for responsive design to work.
+      (Responsive design = make the website look good on
+      smaller screen sizes like a phone or a tablet). -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="Shop for high-quality products including athletic socks, basketballs, and t-shirts.">
-    <title>E-commerce Website</title>
-    <!-- fav-icon -->
-    <link rel="icon" href="images/fav-icon.jpeg" type="image/png" sizes="32x32">
-    <link rel="icon" href="images/fav-icon.jpeg" type="image/png" sizes="16x16">
-    <!-- css files -->
+
+    <!-- Load a font called Roboto from Google Fonts. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Here are the CSS files for this page. -->
     <link rel="stylesheet" href="styles/shared/general.css">
     <link rel="stylesheet" href="styles/shared/amazon-header.css">
     <link rel="stylesheet" href="styles/pages/amazon.css">
-</head>
+  </head>
+  <body>
+    <div class="amazon-header">
+      <div class="amazon-header-left-section">
+        <a href="homePage.html" class="header-link">
+          <img class="amazon-logo"
+            src="images/amazon-logo-white.png">
+          <img class="amazon-mobile-logo"
+            src="images/amazon-mobile-logo-white.png">
+        </a>
+      </div>
 
-<body>
-    <header class="amazon-header">
-        <div class="amazon-header-left-section">
-            <a style="margin: 50px;"  href="homePage.html" class="header-link">
-                <img style="width: 30px; height: 10px;" class="amazon-logo" src="images/amazon-logo-white.png" alt="Amazon Logo">
-                <img style = "width: 10px; height: 10px;" class="amazon-mobile-logo" src="images/amazon-mobile-logo-white.png" alt="Amazon Mobile Logo"> !
-            </a>
-        </div>
-        <div class="amazon-header-middle-section">
-            <input class="search-bar" type="text" placeholder="Search" aria-label="Search products">
-            <button class="search-button" aria-label="Search button">
-                <img class="search-icon" src="images/icons/search-icon.png" alt="Search Icon">
-            </button>
-        </div>
+      <div class="amazon-header-middle-section">
+        <input class="search-bar" type="text" placeholder="Search">
 
-        <div class="amazon-header-right-section">
-            <a class="orders-link header-link" href="orders.html">
-                <span class="returns-text">Returns</span>
-                <span class="orders-text">& Orders</span>
-            </a>
-            <a class="cart-link header-link" href="checkout.html" aria-label="Shopping Cart">
-                <img class="cart-icon" src="images/icons/cart-icon.png" alt="Cart Icon">
-                <div class="cart-quantity">3</div>
-                <div class="cart-text">Cart</div>
-            </a>
-        </div>
-    </header>
+        <button class="search-button">
+          <img class="search-icon" src="images/icons/search-icon.png">
+        </button>
+      </div>
 
-    <main class="main">
-        <section class="products-grid">
-            <article class="product-container">
-                <div class="product-image-container">
-                    <img class="product-image" src="images/products/athletic-cotton-socks-6-pairs.jpg"
-                        alt="Black and Gray Athletic Cotton Socks - 6 Pairs">
-                </div>
+      <div class="amazon-header-right-section">
+        <a class="orders-link header-link" href="orders.html">
+          <span class="returns-text">Returns</span>
+          <span class="orders-text">& Orders</span>
+        </a>
 
-                <h2 class="product-name limit-text-to-2-lines">Black and Gray Athletic Cotton Socks - 6 Pairs</h2>
+        <a class="cart-link header-link" href="checkout.html">
+          <img class="cart-icon" src="images/icons/cart-icon.png">
+          <div class="cart-quantity js-cart-quantity">0</div>
+          <div class="cart-text">Cart</div>
+        </a>
+      </div>
+    </div>
 
-                <div class="product-rating-container">
-                    <img class="product-rating-stars" src="images/ratings/rating-45.png" alt="Rating: 4.5 stars">
-                    <div class="product-rating-count link-primary">87</div>
-                </div>
+    <div class="main">
+      <div class="products-grid js-products-grid">
+      </div>
+    </div>
 
-                <div class="product-price">$10.90</div>
-
-                <div class="product-quantity-container">
-                    <label for="quantity-socks">Quantity:</label>
-                    <select id="quantity-socks" aria-label="Select quantity">
-                        <option selected value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                </div>
-
-                <div class="product-spacer"></div>
-
-                <div class="added-to-cart">
-                    <img src="images/icons/checkmark.png" alt="Checkmark">
-                    Added
-                </div>
-
-                <button class="add-to-cart-button button-primary">Add to Cart</button>
-            </article>
-
-            <article class="product-container">
-                <div class="product-image-container">
-                    <img class="product-image" src="images/products/intermediate-composite-basketball.jpg"
-                        alt="Intermediate Size Basketball">
-                </div>
-                <h2 class="product-name limit-text-to-2-lines">Intermediate Size Basketball</h2>
-                <div class="product-rating-container">
-                    <img class="product-rating-stars" src="images/ratings/rating-40.png" alt="Rating: 4.0 stars">
-                    <div class="product-rating-count link-primary">127</div>
-                </div>
-                <div class="product-price">$20.95</div>
-                <div class="product-quantity-container">
-                    <label for="quantity-basketball">Quantity:</label>
-                    <select id="quantity-basketball" aria-label="Select quantity">
-                        <option selected value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                </div>
-                <div class="product-spacer"></div>
-                <div class="added-to-cart">
-                    <img src="images/icons/checkmark.png" alt="Checkmark">
-                    Added
-                </div>
-                <button class="add-to-cart-button button-primary">Add to Cart</button>
-            </article>
-
-            <article class="product-container">
-                <div class="product-image-container">
-                    <img class="product-image" src="images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg"
-                        alt="Adults Plain Cotton T-Shirt - 2 Pack">
-                </div>
-                <h2 class="product-name limit-text-to-2-lines">Adults Plain Cotton T-Shirt - 2 Pack</h2>
-                <div class="product-rating-container">
-                    <img class="product-rating-stars" src="images/ratings/rating-45.png" alt="Rating: 4.5 stars">
-                    <div class="product-rating-count link-primary">56</div>
-                </div>
-                <div class="product-price">$7.99</div>
-                <div class="product-quantity-container">
-                    <label for="quantity-tshirt">Quantity:</label>
-                    <select id="quantity-tshirt" aria-label="Select quantity">
-                        <option selected value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                </div>
-                <div class="product-spacer"></div>
-                <div class="added-to-cart">
-                    <img src="images/icons/checkmark.png" alt="Checkmark">
-                    Added
-                </div>
-                <button class="add-to-cart-button button-primary">Add to Cart</button>
-            </article>
-        </section>
-    </main>
-</body>
-
+    <script type="module" src="scripts/amazon.js"></script>
+  </body>
 </html>
