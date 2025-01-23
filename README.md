@@ -31,8 +31,9 @@ Welcome to the **IP-I-Projects** repository! This collection showcases projects 
 - HTML, CSS and JavaScript
 
 ## 📞 Contact
+- [Robel Ermiyas' LinkedIn](https://www.linkedin.com/in/robel-ermiyas)
 
-For any inquiries or feedback, feel free to reach out to the group members.
+For any inquiries or feedback, feel free to reach out.
 
 ---
 
