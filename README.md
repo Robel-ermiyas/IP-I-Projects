@@ -34,6 +34,4 @@ For any inquiries or feedback, feel free to reach out to the group members.
 
 Thank you for visiting our project repository! 🌐
 
----
 
-Thank you for visiting our repository! Feel free to explore the projects and reach out if you have any questions.
