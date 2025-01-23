@@ -30,4 +30,10 @@ Welcome to the **IP-I-Projects** repository! This collection showcases projects 
 
 - HTML, CSS and JavaScript
 
-Feel free to explore and contribute!
+## 📞 Contact
+
+For any inquiries or feedback, feel free to reach out to the group members.
+
+---
+
+Thank you for visiting our project repository! 🌐
