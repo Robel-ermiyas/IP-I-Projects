@@ -1,75 +1,81 @@
-import {renderOrderSummary} from './checkout/orderSummary.js';
-import {renderPaymentSummary} from './checkout/paymentSummary.js';
-import {loadProducts, loadProductsFetch} from '../data/products.js';
-import {loadCart} from '../data/cart.js';
-// import '../data/cart-class.js';
-// import '../data/backend-practice.js';
+import { renderOrderSummary } from "./checkout/orderSummary.js";
+import { renderPaymentSummary } from "./checkout/paymentSummary.js";
+import '../data/cart.js'; 
+import { loadProductsFetch } from "../data/products.js";
+import { loadCartFetch } from "../data/cart.js";
+
 
 async function loadPage() {
   try {
-    // throw 'error1';
+    //throw 'error';
 
-    await loadProductsFetch();
+    await Promise.all([
 
+      loadProductsFetch(),
+      loadCartFetch()
+  
+    ]);
+
+    /*
     const value = await new Promise((resolve, reject) => {
       // throw 'error2';
-      loadCart(() => {
+      loadCartFetch(() => {
         // reject('error3');
-        resolve('value3');
+        resolve('value2');
       });
     });
+    */
 
   } catch (error) {
-    console.log('Unexpected error. Please try again later.');
-  }
+    console.log(error);
+    console.log('unexpected error. Please try again later.');
+  } 
 
   renderOrderSummary();
   renderPaymentSummary();
+
+  //return 'value2';
 }
-loadPage();
+
+loadPage();//.then((value) => {
+  //console.log(value);
+  //console.log('next step');
+//});
 
 /*
+//array of promises. 
 Promise.all([
   loadProductsFetch(),
+
   new Promise((resolve) => {
     loadCart(() => {
-      resolve();
+      resolve('value2');
     });
   })
 
-]).then((values) => {
-  console.log(values);
+]).then(() => {
+  // console.log(value);
+
   renderOrderSummary();
   renderPaymentSummary();
 });
-*/
 
-/*
-new Promise((resolve) => {
-  loadProducts(() => {
-    resolve('value1');
-  });
+// new Promise((resolve) => {
+//   loadProducts(() => {
+//     resolve('value1');
+//   });
 
-}).then((value) => {
-  console.log(value);
+// }).then((value) => {
+//   console.log(value);
 
-  return new Promise((resolve) => {
-    loadCart(() => {
-      resolve();
-    });
-  });
+//   return new Promise((resolve) => {
+//     loadCart(() => {
+//       resolve();
+//     });
+//   });
 
-}).then(() => {
-  renderOrderSummary();
-  renderPaymentSummary();
-});
-*/
-
-/*
-loadProducts(() => {
-  loadCart(() => {
-    renderOrderSummary();
-    renderPaymentSummary();
-  });
-});
+// }).then(() => {
+//   renderOrderSummary();
+//   renderPaymentSummary();
+// });
 */
