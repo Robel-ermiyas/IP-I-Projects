@@ -1,18 +1,26 @@
-import {formatCurrency} from '../scripts/utils/money.js';
+import formatCurrency from "../scripts/utils/money.js";
+
 
 export function getProduct(productId) {
   let matchingProduct;
 
   products.forEach((product) => {
+
     if (product.id === productId) {
       matchingProduct = product;
     }
   });
 
+
+  if(!matchingProduct){
+    console.warn('This product does not exist');
+    return;
+  } 
+
   return matchingProduct;
 }
 
-class Product {
+export class Product {
   id;
   image;
   name;
@@ -32,7 +40,7 @@ class Product {
   }
 
   getPrice() {
-    return `$${formatCurrency(this.priceCents)}`;
+    return `$${formatCurrency(this.priceCents)}`
   }
 
   extraInfoHTML() {
@@ -40,106 +48,117 @@ class Product {
   }
 }
 
-class Clothing extends Product {
+//inheritance
+export class Clothing extends Product{
   sizeChartLink;
 
   constructor(productDetails) {
-    super(productDetails);
+    super(productDetails); //calls the constructor of the parent class
     this.sizeChartLink = productDetails.sizeChartLink;
   }
 
   extraInfoHTML() {
-    // super.extraInfoHTML();
-    return `
+
+    if (this.id === "83d4ca15-0f35-48f5-b7a3-1ea210004f2e") {
+      return `
+      <div class="variation-name">Color</div>
+      <div class="js-variation-options-container variation-options-container">
+        <button class="js-variation-option variation-option is-selected" data-product-id="83d4ca15-0f35-48f5-b7a3-1ea210004f2e">Teal</button>
+        <button class="js-variation-option variation-option" data-product-id="83d4ca15-0f35-48f5-b7a3-1ea210004f2e">Black</button>
+        <button class="js-variation-option variation-option" data-product-id="83d4ca15-0f35-48f5-b7a3-1ea210004f2e">Red</button>
+      </div>
+    `;
+    } else {
+
+      return `
       <a href="${this.sizeChartLink}" target="_blank">
         Size chart
+      </a>
+    `;
+    }
+
+  }
+}
+
+export class Appliance extends Product {
+  instructionsLink;
+  warrantyLink;
+
+  constructor(productDetails) {
+    super(productDetails);
+    this.instructionsLink = productDetails.instructionsLink;
+    this.warrantyLink = productDetails.warrantyLink
+  }
+
+  extraInfoHTML() {
+    return `
+      <a href="${this.instructionsLink}" target="_blank">
+        Instructions
+      </a>
+      <a href="${this.warrantyLink}" target="_blank">
+        Warranty
       </a>
     `;
   }
 }
 
-/*
-const date = new Date();
-console.log(date);
-console.log(date.toLocaleTimeString());
-*/
-
-/*
-console.log(this);
-
-const object2 = {
-  a: 2,
-  b: this.a
-};
-*/
-
-/*
-function logThis() {
-  console.log(this);
-}
-logThis();
-logThis.call('hello');
-
-this
-const object3 = {
-  method: () => {
-    console.log(this);
-  }
-};
-object3.method();
-*/
-
 export let products = [];
 
 export function loadProductsFetch() {
+  //fetch uses promise and returns a promise
   const promise = fetch(
     'https://supersimplebackend.dev/products'
   ).then((response) => {
-    return response.json();
-  }).then((productsData) => {
-    products = productsData.map((productDetails) => {
-      if (productDetails.type === 'clothing') {
+    return response.json()
+  }).then((producstData) => {
+    products = producstData.map((productDetails) => {
+      if(productDetails.type === 'clothing') {
         return new Clothing(productDetails);
-      }
+      } else if (productDetails.type === 'appliance') {
+        return new Appliance(productDetails);
+      } 
       return new Product(productDetails);
     });
-
-    console.log('load products');
-  }).catch((error) => {
-    console.log('Unexpected error. Please try again later.');
+    console.log('load products'); 
+  }).catch((error) => { //catching errors
+    console.log(error);
+    console.log('unexpected error. Please try again later.');
   });
-
   return promise;
 }
-/*
-loadProductsFetch().then(() => {
-  console.log('next step');
-});
-*/
 
+
+// loadProductsFetch().then(() => {
+//   console.log('next step');
+// });
+
+/*
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
 
   xhr.addEventListener('load', () => {
     products = JSON.parse(xhr.response).map((productDetails) => {
-      if (productDetails.type === 'clothing') {
+      if(productDetails.type === 'clothing') {
         return new Clothing(productDetails);
-      }
+      } else if (productDetails.type === 'appliance') {
+        return new Appliance(productDetails);
+      } 
       return new Product(productDetails);
     });
-
     console.log('load products');
-
-    fun();
+    fun(); 
   });
-
+  
   xhr.addEventListener('error', (error) => {
-    console.log('Unexpected error. Please try again later.');
+    console.log(error);
+    console.log('unexpected error. Please try again later.');
   });
+
 
   xhr.open('GET', 'https://supersimplebackend.dev/products');
-  xhr.send();
+  xhr.send(); //asynchronous, it will send the request but it will not wait for response to get back
 }
+*/
 
 /*
 export const products = [
@@ -202,7 +221,10 @@ export const products = [
       "toaster",
       "kitchen",
       "appliances"
-    ]
+    ],
+    type: 'appliance',
+    instructionsLink: 'images/appliance-instructions.png',
+    warrantyLink: 'images/appliance-warranty.png'
   },
   {
     id: "3ebe75dc-64d2-4137-8860-1f5a963e534b",
@@ -387,7 +409,10 @@ export const products = [
       "water boiler",
       "appliances",
       "kitchen"
-    ]
+    ],
+    type: 'appliance',
+    instructionsLink: 'images/appliance-instructions.png',
+    warrantyLink: 'images/appliance-warranty.png'
   },
   {
     id: "6b07d4e7-f540-454e-8a1e-363f25dbae7d",
@@ -692,7 +717,10 @@ export const products = [
       "coffeemakers",
       "kitchen",
       "appliances"
-    ]
+    ],
+    type: 'appliance',
+    instructionsLink: 'images/appliance-instructions.png',
+    warrantyLink: 'images/appliance-warranty.png'
   },
   {
     id: "02e3a47e-dd68-467e-9f71-8bf6f723fdae",
@@ -752,7 +780,10 @@ export const products = [
       "food blenders",
       "kitchen",
       "appliances"
-    ]
+    ],
+    type: 'appliance',
+    instructionsLink: 'images/appliance-instructions.png',
+    warrantyLink: 'images/appliance-warranty.png'
   },
   {
     id: "36c64692-677f-4f58-b5ec-0dc2cf109e27",
@@ -800,11 +831,99 @@ export const products = [
       "apparel",
       "mens"
     ]
+  },
+  {
+    id: "bc2847e9-5323-403f-b7cf-57fde044a975",
+    image: "images/products/backpack.jpg",
+    name: "Addidas Backpack",
+    rating: {
+      stars: 4.5,
+      count: 5157
+    },
+    priceCents: 5400,
+    keywords: [
+      "sweaters",
+      "hoodies",
+      "apparel",
+      "mens"
+    ]
+  },
+  {
+    id: "bc2847e9-5323-403f-b7cf-57fde041a955",
+    image: "images/products/umbrella.jpg",
+    name: "LEXA Foldable Umbrella",
+    rating: {
+      stars: 5,
+      count: 3147
+    },
+    priceCents: 2400,
+    keywords: [
+      "sweaters",
+      "hoodies",
+      "apparel",
+      "mens"
+    ]
   }
 ].map((productDetails) => {
-  if (productDetails.type === 'clothing') {
+  if(productDetails.type === 'clothing') {
     return new Clothing(productDetails);
-  }
+  } else if (productDetails.type === 'appliance') {
+    return new Appliance(productDetails);
+  } 
+
   return new Product(productDetails);
 });
+*/
+
+/*
+// const toaster = new Appliance({
+//   id: "54e0eccd-8f36-462b-b68a-8182611d9add",
+//   image: "images/products/black-2-slot-toaster.jpg",
+//   name: "2 Slot Toaster - Black",
+//   rating: {
+//     stars: 5,
+//     count: 2197
+//   },
+//   priceCents: 1899,
+//   keywords: [
+//     "toaster",
+//     "kitchen",
+//     "appliances"
+//   ],
+//   type: {
+//     instructionsLink: 'images/appliance-instructions.png',
+//     warrantyLink: 'images/appliance-warranty.png'
+//   }
+// });
+
+// console.log(toaster.instructionsLink)
+
+// const date = new Date();
+
+// console.log(date);
+// console.log(date.toLocaleTimeString());
+
+// console.log(this);
+
+// const object2 = {
+//   a: 2,
+//   b: this.a
+
+// };
+
+// function logThis() {
+//   console.log(this);
+// }
+
+// logThis();
+// logThis.call('hello');
+
+// this
+// const object3 = {
+//   method: () => {
+//     console.log(this);
+//   }
+// };
+
+// object3.method();
 */
