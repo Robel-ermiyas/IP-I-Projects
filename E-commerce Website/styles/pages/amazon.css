@@ -17,6 +17,41 @@
   grid-template-columns: repeat(8, 1fr);
 }
 
+.products-grid .empty-results-message {
+  padding-left: 10px;
+  padding-top: 10px;
+  grid-column: span;
+  width: 250px;
+}
+
+.products-grid .variation-name {
+  font-weight: 500;
+  margin-bottom: 1px;
+}
+
+.products-grid .variation-options-container {
+  display: flex;
+  margin-top: 5px;
+  column-gap: 7px;
+}
+
+
+.products-grid .variation-option {
+  padding: 5px 10px;
+  border: 1px solid rgb(173, 177, 184);
+  background-color: transparent;
+  border-radius: 7px;
+  font-size: 15px;
+}
+
+.products-grid .is-selected {
+  border: 2px solid rgb(231, 117, 2);
+  padding: 4px 9px;
+
+}
+
+
+
 /* @media is used to create responsive design (making the
    website look good on any screen size). This @media
    means when the screen width is 2000px or less, we
@@ -142,6 +177,10 @@
      be invisible. Use JavaScript to change the
      opacity and make it visible. */
   opacity: 0;
+}
+
+.js-added-to-cart {
+  opacity: 1;
 }
 
 .added-to-cart img {
